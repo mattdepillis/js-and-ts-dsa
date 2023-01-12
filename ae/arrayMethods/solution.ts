@@ -13,6 +13,7 @@ interface Array<T> {
   myMap<U>(callbackfn: (value: number, i: number, array: T[]) => U, thisArg?: any): T[]
 
   /* myFilter */
+  myFilter<U>(callbackfn: (value: number, i: number, array: T[]) => U, thisArg?: any): T[]
 }
 
 // * test array
@@ -32,4 +33,19 @@ Array.prototype.myMap = function(callback) {
   return newArr
 }
 
+
+/**
+ * A function that mimics the native Array.prototype.filter.
+ * @param
+ * @returns
+*/
+Array.prototype.myFilter = function (callback) {
+  const newArr: any[] = []
+  for (let i = 0; i < this.length; i++) {
+    if (callback(this[i], i, this)) newArr.push(this[i])
+  }
+  return newArr
+}
+
 console.log(arr.myMap((i: number): boolean => i == 2))
+console.log(arr.myFilter((i: number): boolean => i % 2 == 0))

@@ -23,4 +23,18 @@ Array.prototype.myMap = function(callback) {
   return newArr
 }
 
-console.log(array.myMap(i => i + 1))
+/**
+ * A function that mimics the native Array.prototype.filter.
+ * @param
+ * @returns
+*/
+Array.prototype.myFilter = function(callback) {
+  newArr = []
+  for (let i = 0; i < this.length; i++) {
+    if (callback(this[i])) newArr.push(this[i])
+  }
+  return newArr
+}
+
+// console.log(array.myMap(i => i + 1))
+console.log(array.myFilter(i => i % 2 == 0))
