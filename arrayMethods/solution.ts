@@ -66,4 +66,4 @@ Array.prototype.myReduce = function(callback, initialValue) {
 
 console.log(arr.myMap((i: number): boolean => i == 2))
 console.log(arr.myFilter((i: number): boolean => i % 2 == 0))
-console.log(arr.myReduce(((i: number, val: number): number => i + val))) // 14
+console.log(arr.myReduce((acc: number, value: number): number => acc + value, 0)) // 14
