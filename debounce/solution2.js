@@ -2,24 +2,17 @@
 Write a custom debounce function.
 */
 function debounce(callback, delay, immediate = false) {
-  this.timer = undefined
-  this.executingImmediate = undefined
+  let timer
+
   return function (...args) {
-    if (immediate) {
-      const time_diff = this.executingImmediate - Date.now()
-      if (time_diff > 0) {
-        this.executingImmediate += delay - time_diff
-        return
-      }
-      else {
-        this.executingImmediate = Date.now() + delay
-        return callback.apply(this, args)
-      }
-    } else {
-      clearTimeout(this.timer)
-      this.timer = setTimeout(() => callback.apply(this, args), delay)
-    }
-    return this.timer
+    clearTimeout(timer)
+    
+    if (immediate && timer == null) callback.call(this, ...args)
+    
+    timer = setTimeout(() => {
+      if (!immediate) callback.call(this, ...args)
+      timer = null
+    }, delay)
   }
 }
 
