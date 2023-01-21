@@ -12,6 +12,9 @@ Implement methods on the Function prototype:
  * @returns {Function} a new function that calls the original function with thisContext bound to the function's `this keyword
 */
 Function.prototype.myBind = function(thisContext, ...args) {
+  /* We use an arrow function here because it inherits the this context of the callback function
+    - a regular function would inherit `this` of the global execution context
+  */
   return (...extraArgs) => {
     const s = Symbol()
     thisContext[s] = this
@@ -56,3 +59,5 @@ function callback() {
 // testing methods
 logNums.myApply(obj, [3, 4])
 logNums.myCall(obj, 5, 6)
+const c = callback.apply(obj)
+console.log(c)
